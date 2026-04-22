@@ -202,53 +202,50 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    column-gap: 56px;
+    column-gap: 44px;
     row-gap: 32px;
-    flex-wrap: wrap;
-    max-width: 1060px;
+    flex-wrap: nowrap;
+    max-width: 1100px;
     margin: 0 auto;
   }
 
-  /* Base: transparent-background PNGs rendered as dark silhouettes */
   .logo-row img {
     height: auto;
-    max-height: 54px;
-    max-width: 150px;
     width: auto;
     object-fit: contain;
     flex-shrink: 0;
-    filter: brightness(0) opacity(0.42);
+    filter: brightness(0) opacity(0.65);
     transition: filter 0.22s ease, transform 0.22s ease;
     display: block;
   }
 
   .logo-row img:hover {
-    filter: brightness(0) opacity(0.80);
+    filter: brightness(0) opacity(0.90);
     transform: scale(1.05);
   }
 
   /* ── Optical sizing per logo ──────────────────────────── */
 
-  /* 1 · DWF — filled circle */
-  .logo-row img:nth-child(1) { max-height: 57px; max-width: 57px; }
+  /* 1 · DWF — 1:1 blob mark */
+  .logo-row img:nth-child(1) { max-height: 56px; max-width: 56px; }
 
-  /* 2 · Glaholt Bowles — boxed text mark */
-  .logo-row img:nth-child(2) { max-height: 51px; max-width: 165px; }
+  /* 2 · Glaholt Bowles — 1.6:1 bordered wordmark */
+  .logo-row img:nth-child(2) { max-height: 56px; max-width: 90px; }
 
-  /* 3 · Marshall Law — wide SVG, transparent bg */
-  .logo-row img:nth-child(3) { max-height: 30px; max-width: 240px; }
+  /* 3 · Marshall Law — 6:1 wide SVG; height reduced so it doesn't dominate */
+  .logo-row img:nth-child(3) { max-height: 32px; max-width: 220px; }
 
-  /* 4 · Legal Aid Ontario — compact badge */
-  .logo-row img:nth-child(4) { max-height: 48px; max-width: 150px; }
+  /* 4 · Legal Aid Ontario — 1.65:1 figure + text */
+  .logo-row img:nth-child(4) { max-height: 56px; max-width: 93px; }
 
-  /* 5 · Bell Temple — square icon */
-  .logo-row img:nth-child(5) { max-height: 48px; max-width: 48px; }
+  /* 5 · Bell Temple — 1:1 icon mark */
+  .logo-row img:nth-child(5) { max-height: 56px; max-width: 56px; }
 
-  /* 6 · Charney Lawyers — tall text stack */
-  .logo-row img:nth-child(6) { max-height: 57px; max-width: 195px; }
+  /* 6 · Charney Lawyers — 2.9:1 bold wordmark */
+  .logo-row img:nth-child(6) { max-height: 56px; max-width: 165px; }
 
-  /* 7 · ARAG — filled circle, visually heavy; cap tightly */
-  .logo-row img:nth-child(7) { max-height: 57px; max-width: 57px; }
+  /* 7 · ARAG — 1:1 badge, displayed as-is */
+  .logo-row img:nth-child(7) { max-height: 56px; max-width: 56px; filter: none; }
 
   /* ─── PROBLEM ─────────────────────────────────────────── */
   .problem {
@@ -472,15 +469,15 @@
     .hero-image { height: 320px; }
 
     .trust { padding: 80px 24px; }
-    .logo-row { column-gap: 32px; row-gap: 24px; max-width: 100%; padding: 0 8px; }
-    .logo-row img { max-height: 39px; max-width: 165px; }
-    .logo-row img:nth-child(1) { max-height: 42px; max-width: 42px; }
-    .logo-row img:nth-child(2) { max-height: 39px; max-width: 126px; }
-    .logo-row img:nth-child(3) { max-height: 24px; max-width: 180px; }
-    .logo-row img:nth-child(4) { max-height: 33px; max-width: 108px; }
-    .logo-row img:nth-child(5) { max-height: 36px; max-width: 36px; }
-    .logo-row img:nth-child(6) { max-height: 42px; max-width: 144px; }
-    .logo-row img:nth-child(7) { max-height: 42px; max-width: 42px; }
+    .logo-row { column-gap: 20px; row-gap: 20px; flex-wrap: wrap; max-width: 100%; padding: 0 8px; }
+    .logo-row img { max-height: 30px; max-width: 120px; }
+    .logo-row img:nth-child(1) { max-height: 30px; max-width: 30px; }
+    .logo-row img:nth-child(2) { max-height: 30px; max-width: 49px; }
+    .logo-row img:nth-child(3) { max-height: 18px; max-width: 138px; }
+    .logo-row img:nth-child(4) { max-height: 30px; max-width: 50px; }
+    .logo-row img:nth-child(5) { max-height: 30px; max-width: 30px; }
+    .logo-row img:nth-child(6) { max-height: 30px; max-width: 88px; }
+    .logo-row img:nth-child(7) { max-height: 30px; max-width: 30px; }
 
     .problem-inner { grid-template-columns: 1fr; }
     .problem-image { height: 320px; }
@@ -563,7 +560,7 @@
     <img src="Law%20Logos/lao-300x182.png" alt="Legal Aid Ontario">
     <img src="Law%20Logos/BELLTEMPLE-LOGO-WHITE.png" alt="Bell Temple">
     <img src="Law%20Logos/Charney.png" alt="Charney Lawyers">
-    <img src="Law%20Logos/ARAG_Logo_2016.png" alt="ARAG">
+    <img src="Law%20Logos/ARAG_Logo_2016-modified.png" alt="ARAG">
   </div>
 </section>
 
@@ -587,7 +584,7 @@
 <section class="testimonial">
   <div class="testimonial-inner">
     <div class="testimonial-avatar">
-      <img src="Law%20Logos/jacob-mcclelland-424297.jpeg" alt="Jacob McLelland">
+      <img src="jacob-mcclelland-424297.jpeg" alt="Jacob McLelland">
     </div>
     <div class="testimonial-body">
       <p class="testimonial-quote">
