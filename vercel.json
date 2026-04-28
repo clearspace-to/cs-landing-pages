@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/law/process",    "destination": "/Law_LandingPages/process.html" },
+    { "source": "/law/privacy",    "destination": "/Law_LandingPages/privacy.html" },
+    { "source": "/law/impression", "destination": "/Law_LandingPages/impression.html" }
+  ]
+}
