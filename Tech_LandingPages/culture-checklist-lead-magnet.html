@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Does Your Office Reflect Your Culture? | Clearspace</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --dark:      #2F3F52;
+    --blue:      #3BABFF;
+    --blue-dim:  #e8f6ff;
+    --white:     #FFFFFF;
+    --off-white: #F6F6F4;
+    --charcoal:  #1A1D20;
+    --muted:     #6B7A8A;
+    --divider:   #E4E4E0;
+    --green:     #2ECC8A;
+    --amber:     #F5A623;
+    --red:       #E8534A;
+  }
+
+  html {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    background: var(--off-white);
+    color: var(--dark);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    min-height: 100vh;
+    padding-bottom: 80px;
+  }
+
+  /* ── Header ── */
+  .site-header {
+    background: var(--dark);
+    padding: 48px 40px 40px;
+    position: relative;
+  }
+  .site-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--blue);
+  }
+  .header-inner {
+    max-width: 840px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 48px;
+    align-items: end;
+  }
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 14px;
+  }
+  .page-title {
+    font-size: 44px;
+    font-weight: 300;
+    line-height: 1.06;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    color: var(--white);
+  }
+  .page-title em { color: var(--blue); font-style: normal; }
+  .page-subtitle {
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.65);
+    margin-top: 14px;
+    line-height: 1.55;
+    max-width: 480px;
+  }
+  .header-aside {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.65;
+    max-width: 200px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* ── Score bar ── */
+  .score-bar {
+    background: var(--white);
+    border-bottom: 1px solid var(--divider);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .score-bar-inner {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 14px 40px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .score-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .score-track {
+    flex: 1;
+    height: 6px;
+    background: var(--divider);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .score-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--blue);
+    border-radius: 3px;
+    transition: width 0.35s ease, background 0.35s ease;
+  }
+  .score-number {
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--dark);
+    min-width: 80px;
+    text-align: right;
+    white-space: nowrap;
+    transition: color 0.3s;
+  }
+  .score-number span {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--muted);
+    margin-left: 2px;
+  }
+
+  /* ── Main ── */
+  .main {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 40px 40px 0;
+  }
+
+  /* ── Section ── */
+  .section {
+    margin-bottom: 40px;
+    background: var(--white);
+    border: 1px solid var(--divider);
+  }
+  .section-head {
+    padding: 20px 28px;
+    border-bottom: 2px solid var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--white);
+  }
+  .section-num {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--blue);
+    padding: 5px 10px;
+    line-height: 1.4;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--dark);
+    letter-spacing: 0.01em;
+  }
+  .section-note {
+    padding: 14px 28px;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.6;
+    font-style: italic;
+    border-bottom: 1px solid var(--divider);
+    background: var(--off-white);
+  }
+
+  /* ── Items ── */
+  .items { display: flex; flex-direction: column; }
+
+  .item {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--divider);
+    cursor: pointer;
+    transition: background 0.15s;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .item:last-child { border-bottom: none; }
+  .item:hover { background: var(--blue-dim); }
+  .item:active { background: #d4eeff; }
+
+  .item.checked { background: #f0fbff; }
+  .item.checked:hover { background: #e4f7ff; }
+
+  .item-box {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    border: 2px solid var(--divider);
+    border-radius: 3px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .item.checked .item-box {
+    background: var(--blue);
+    border-color: var(--blue);
+  }
+  .item-check-icon {
+    width: 12px;
+    height: 12px;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .item.checked .item-check-icon { opacity: 1; }
+
+  .item-text { flex: 1; }
+  .item-label {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--dark);
+    line-height: 1.35;
+    display: block;
+    transition: color 0.15s;
+  }
+  .item.checked .item-label { color: var(--blue); }
+  .item-desc {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.55;
+    display: block;
+    margin-top: 4px;
+  }
+
+  /* ── Result block ── */
+  .result-wrap {
+    margin: 0 0 40px;
+    padding: 0;
+  }
+  .result-block {
+    border: 1px solid var(--divider);
+    background: var(--white);
+  }
+  .result-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--dark);
+    padding: 18px 28px 14px;
+    border-bottom: 1px solid var(--divider);
+  }
+  .result-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .result-band {
+    padding: 20px 20px 22px;
+    border-right: 1px solid var(--divider);
+    transition: background 0.35s;
+    position: relative;
+  }
+  .result-band:last-child { border-right: none; }
+  .result-band.active {
+    background: var(--dark);
+  }
+  .result-band.active::before {
+    content: '▲';
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: 10px;
+    color: var(--blue);
+  }
+  .result-range {
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--blue);
+    display: block;
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+  .result-band.active .result-range { color: var(--blue); }
+  .result-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .result-band.active .result-desc { color: rgba(255,255,255,0.75); }
+
+  /* ── CTA ── */
+  .cta-block {
+    background: var(--dark);
+    padding: 36px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 40px;
+    border: 1px solid var(--dark);
+  }
+  .cta-copy { flex: 1; }
+  .cta-copy strong {
+    display: block;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .cta-copy p {
+    font-size: 15px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.55;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: var(--blue);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 16px 32px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background 0.15s, transform 0.1s;
+    border: none;
+    cursor: pointer;
+  }
+  .cta-btn:hover { background: #2fa3f7; transform: translateY(-1px); }
+  .cta-btn:active { transform: translateY(0); }
+
+  /* ── Brand footer ── */
+  .brand-bar {
+    background: var(--blue);
+    padding: 14px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand-inner {
+    max-width: 840px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand-name {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+  .brand-contact {
+    font-size: 13px;
+    font-weight: 300;
+    display: flex;
+    gap: 28px;
+    align-items: center;
+  }
+  .brand-contact a {
+    color: rgba(255,255,255,0.9);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    padding-bottom: 1px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .brand-contact a:hover { color: var(--white); border-color: var(--white); }
+
+  @media (max-width: 680px) {
+    .page-title { font-size: 30px; }
+    .header-inner { grid-template-columns: 1fr; }
+    .header-aside { display: none; }
+    .main { padding: 24px 20px 0; }
+    .site-header { padding: 32px 20px 28px; }
+    .score-bar-inner { padding: 12px 20px; }
+    .section-head { padding: 16px 20px; }
+    .section-note { padding: 12px 20px; }
+    .item { padding: 18px 20px; gap: 14px; }
+    .item-label { font-size: 15px; }
+    .result-row { grid-template-columns: 1fr 1fr; }
+    .result-band { border-bottom: 1px solid var(--divider); }
+    .cta-block { flex-direction: column; padding: 28px 20px; }
+    .cta-btn { width: 100%; text-align: center; }
+    .brand-contact { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<div class="site-header">
+  <div class="header-inner">
+    <div>
+      <p class="eyebrow">Clearspace &middot; Built for Tech Companies</p>
+      <h1 class="page-title">Does Your Office Reflect<br><em>Your Culture?</em></h1>
+      <p class="page-subtitle">A 12-point checklist for tech leaders whose office should make their culture visible — to candidates, clients, and the team.</p>
+    </div>
+    <p class="header-aside">Your office is the clearest signal of who you are as a company. Here are the 12 things that make that signal strong.</p>
+  </div>
+</div>
+
+<!-- ── Sticky score bar ── -->
+<div class="score-bar">
+  <div class="score-bar-inner">
+    <span class="score-label">Your score</span>
+    <div class="score-track">
+      <div class="score-fill" id="scoreFill"></div>
+    </div>
+    <div class="score-number" id="scoreNumber">0 <span>/ 12</span></div>
+  </div>
+</div>
+
+<!-- ── Main content ── -->
+<div class="main">
+
+  <!-- 01 Focus & Deep Work -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <span class="section-title">Focus &amp; Deep Work</span>
+    </div>
+    <p class="section-note">A culture of excellence starts with a space that actually enables excellent work — not just a policy about it.</p>
+    <div class="items">
+      <div class="item" onclick="toggle(this)" role="checkbox" aria-checked="false" tabindex="0">
+        <div class="item-box">
+          <svg class="item-check-icon" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="item-text">
+          <span class="item-label">There is dedicated quiet space</span>
+          <span class="item-desc">Not just a "please use headphones" policy — actual physical separation from noise.</span>
+        </div>
+      </div>
+      <div class="item" onclick="toggle(this)" role="checkbox" aria-checked="false" tabindex="0">
+        <div class="item-box">
+          <svg class="item-check-icon" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="item-text">
+          <span class="item-label">The desk setup is noticeably better than home</span>
+          <span class="item-desc">Monitor size, chair quality, keyboard — not just "a desk."</span>
+        </div>
+      </div>
+      <div class="item" onclick="toggle(this)" role="checkbox" aria-checked="false" tabindex="0">
+        <div class="item-box">
+          <svg class="item-check-icon" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="item-text">
+          <span class="item-label">Natural light reaches most workstations</span>
+          <span class="item-desc">Or lighting has been deliberately designed, not defaulted.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 Collaboration & Energy -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <span class="section-title">Collaboration &amp; Energy</span>
+    </div>
+    <p class="section-note">Your culture lives in how people work together. The office should make that easy to see and feel.</p>
+    <div class="items">
+      <div class="item" onclick="toggle(this)" role="checkbox" aria-checked="false" tabindex="0">
+        <div class="item-box">
+          <svg class="item-check-icon" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="item-text">
+          <span class="item-label">There are informal collision points</span>
+          <span class="item-desc">Areas where people naturally run into each other — not just scheduled meeting rooms.</span>
+        </div>
+      </div>
+      <div class="item" onclick="toggle(this)" role="checkbox" aria-checked="false" tabindex="0">
+        <div class="item-box">
+          <svg class="item-check-icon" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="item-text">
+          <span class="item-label">There is a range of collaboration spaces beyond the boardroom</span>
+          <span class="item-desc">Standing tables, lounge areas, open project zones.</span>
+        </div>
+      </div>
+      <div class="item" onclick="toggle(this)" role="checkbox" aria-checked="false" tabindex="0">
+        <div class="item-box">
+          <svg class="item-check-icon" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="item-text">
+          <span class="item-label">The office has energy, not just occupancy</span>
+          <span class="item-desc">People want to be there, not just tolerating it. That distinction is a culture signal.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 Comfort & Amenities -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <span class="section-title">Comfort &amp; Amenities</span>
+    </div>
+    <p class="section-note">The details tell people whether the company actually cares about them. They notice more than you think.</p>
+    <div class="items">
+      <div class="item" onclick="toggle(this)" role="checkbox" aria-checked="false" tabindex="0">
+        <div class="item-box">
+          <svg class="item-check-icon" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="item-text">
+          <span class="item-label">Temperature and acoustics are controlled</span>
+          <span class="item-desc">Your team isn't complaining about noise or cold every week.</span>
+        </div>
+      </div>
+      <div class="item" onclick="toggle(this)" role="checkbox" aria-checked="false" tabindex="0">
+        <div class="item-box">
+          <svg class="item-check-icon" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="item-text">
+          <span class="item-label">There is access to good coffee and food</span>
+          <span class="item-desc">On-site or close enough that people actually use it, not just endure it.</span>
+        </div>
+      </div>
+      <div class="item" onclick="toggle(this)" role="checkbox" aria-checked="false" tabindex="0">
+        <div class="item-box">
+          <svg class="item-check-icon" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="item-text">
+          <span class="item-label">People have somewhere to put their things</span>
+          <span class="item-desc">Lockers, storage, personal space — not hauling a bag every time they come in.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 Design & Signal -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <span class="section-title">Design &amp; Signal</span>
+    </div>
+    <p class="section-note">This is where culture becomes visible. The design either says something about who you are — or it says nothing at all.</p>
+    <div class="items">
+      <div class="item" onclick="toggle(this)" role="checkbox" aria-checked="false" tabindex="0">
+        <div class="item-box">
+          <svg class="item-check-icon" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="item-text">
+          <span class="item-label">The space reflects your company's values and personality</span>
+          <span class="item-desc">Not generic corporate or default startup — something identifiably, recognisably yours.</span>
+        </div>
+      </div>
+      <div class="item" onclick="toggle(this)" role="checkbox" aria-checked="false" tabindex="0">
+        <div class="item-box">
+          <svg class="item-check-icon" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="item-text">
+          <span class="item-label">A visitor could guess what kind of company you are just from the space</span>
+          <span class="item-desc">That's what good culture design looks like — it communicates without explaining.</span>
+        </div>
+      </div>
+      <div class="item" onclick="toggle(this)" role="checkbox" aria-checked="false" tabindex="0">
+        <div class="item-box">
+          <svg class="item-check-icon" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="item-text">
+          <span class="item-label">There is at least one detail people bring up unprompted</span>
+          <span class="item-desc">When people describe your office to others without being asked, that's culture working.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Result bands -->
+  <div class="result-wrap">
+    <div class="result-block">
+      <p class="result-label">How to read your score</p>
+      <div class="result-row">
+        <div class="result-band" id="band-10-12">
+          <span class="result-range">10 – 12</span>
+          <span class="result-desc">Your office is making your culture visible. It's doing active work for you — in hiring, retention, and team identity.</span>
+        </div>
+        <div class="result-band" id="band-7-9">
+          <span class="result-range">7 – 9</span>
+          <span class="result-desc">Your culture is present but not fully expressed. There are gaps that dilute the signal.</span>
+        </div>
+        <div class="result-band" id="band-4-6">
+          <span class="result-range">4 – 6</span>
+          <span class="result-desc">Your office is culture-neutral at best. It's not hurting you — but it's not helping either.</span>
+        </div>
+        <div class="result-band" id="band-0-3">
+          <span class="result-range">0 – 3</span>
+          <span class="result-desc">Your office is likely working against your culture. The space tells a different story than the one you're trying to tell.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <div class="cta-copy">
+      <strong>Not seeing your culture in your office? We can help.</strong>
+      <p>Clearspace designs and builds tech offices that make your culture visible — to every candidate, client, and team member who walks in.</p>
+    </div>
+    <a class="cta-btn" href="https://www.clearspace.to/contact" target="_blank" rel="noopener">Talk to Clearspace</a>
+  </div>
+
+</div><!-- /main -->
+
+<!-- ── Brand bar ── -->
+<div class="brand-bar">
+  <div class="brand-inner">
+    <span class="brand-name">Clearspace &middot; Spaces Made to Work</span>
+    <span class="brand-contact">
+      <a href="https://www.clearspace.to/contact" target="_blank" rel="noopener">clearspace.to/contact</a>
+      <a href="mailto:sales@clearspace.to">sales@clearspace.to</a>
+      <a href="https://maps.google.com/?q=1+Adelaide+St+E,+Toronto,+ON" target="_blank" rel="noopener">1 Adelaide St E, Toronto</a>
+    </span>
+  </div>
+</div>
+
+<script>
+  const TOTAL = 12;
+
+  function toggle(el) {
+    el.classList.toggle('checked');
+    el.setAttribute('aria-checked', el.classList.contains('checked'));
+    updateScore();
+  }
+
+  // keyboard support
+  document.querySelectorAll('.item').forEach(item => {
+    item.addEventListener('keydown', e => {
+      if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggle(item); }
+    });
+  });
+
+  function updateScore() {
+    const checked = document.querySelectorAll('.item.checked').length;
+    const pct = (checked / TOTAL) * 100;
+
+    document.getElementById('scoreNumber').innerHTML = `${checked} <span>/ ${TOTAL}</span>`;
+    document.getElementById('scoreFill').style.width = pct + '%';
+
+    // color of fill
+    let fillColor = '#3BABFF';
+    if (checked >= 10) fillColor = '#2ECC8A';
+    else if (checked >= 7) fillColor = '#3BABFF';
+    else if (checked >= 4) fillColor = '#F5A623';
+    else if (checked > 0) fillColor = '#E8534A';
+    document.getElementById('scoreFill').style.background = fillColor;
+
+    // highlight active band
+    document.querySelectorAll('.result-band').forEach(b => b.classList.remove('active'));
+    if (checked >= 10) document.getElementById('band-10-12').classList.add('active');
+    else if (checked >= 7) document.getElementById('band-7-9').classList.add('active');
+    else if (checked >= 4) document.getElementById('band-4-6').classList.add('active');
+    else if (checked > 0) document.getElementById('band-0-3').classList.add('active');
+  }
+</script>
+</body>
+</html>
