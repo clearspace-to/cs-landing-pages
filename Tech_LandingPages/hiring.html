@@ -435,10 +435,10 @@
     btn.disabled = true;
     btn.textContent = 'Sending…';
 
-    fetch('https://formspree.io/f/mojbwewq', {
+    fetch('/api/contact', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ email: email, _replyto: email, _subject: 'Inquiry — Hiring campaign' })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, source: 'Hiring' })
     })
     .then(function (res) {
       if (res.ok) { form.style.display = 'none'; success.style.display = 'block'; }
