@@ -19,7 +19,7 @@ export default async function handler(req, res) {
 
   try {
     const airtableRes = await fetch(
-      `https://api.airtable.com/v0/${baseId}/Email%20Library`,
+      `https://api.airtable.com/v0/${baseId}/Emails`,
       {
         method: 'POST',
         headers: {
