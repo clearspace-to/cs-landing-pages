@@ -11,6 +11,10 @@
     { "source": "/tech/growth",                     "destination": "/Tech_LandingPages/growth.html" },
     { "source": "/tech/growth-checklist",           "destination": "/Tech_LandingPages/growth-checklist-lead-magnet.html" },
     { "source": "/tech/hiring",                     "destination": "/Tech_LandingPages/hiring.html" },
-    { "source": "/tech/hiring-checklist",           "destination": "/Tech_LandingPages/hiring-checklist-lead-magnet.html" }
+    { "source": "/tech/hiring-checklist",           "destination": "/Tech_LandingPages/hiring-checklist-lead-magnet.html" },
+
+    { "source": "/finance/budget",      "destination": "/Finance_LandingPages/budget.html" },
+    { "source": "/finance/discretion",  "destination": "/Finance_LandingPages/discretion.html" },
+    { "source": "/finance/risk",        "destination": "/Finance_LandingPages/risk.html" }
   ]
 }
